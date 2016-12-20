@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>传递ArrayBuffer对象</title>
+</head>
+<body>
+	<article>传递ArrayBuffer对象，原始ArrayBuffer被清除并且无法使用</article>
+	<script>
+		
+		var worker = new Worker("workers.js");
+		var data = function() {
+			return navigator.appName;
+		}
+		worker.postMessage(data);
+	</script>
+</body>
+</html>

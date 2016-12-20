@@ -1,0 +1,31 @@
+html,body {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+.terminal-0 {
+	position: absolute;
+	margin-left:calc(50% - 400px);
+	margin-top:200px;
+	width: 800px;
+	height:600px;
+}
+.tab-panels {
+	overflow: hidden;
+    text-align: left;
+    margin: 0;
+    border: 0;
+}
+.terminal {
+	padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+    width: 1786px;
+    height: 439px;
+    background-color: rgb(8, 77, 17);
+}
+.message {
+	font-weight: bold;
+	color: rgb(240, 240, 240);
+	font-size: 14px;
+}

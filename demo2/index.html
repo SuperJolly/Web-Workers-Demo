@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>使用workers后进行计算</title>
+	<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+	<div class="terminal-0">
+		<div class="tab-panels">
+			<div class="terminal">
+				<button onclick="sayHello()">报告老板</button>
+				<div class="message">计算fibonacci某项值(35-38). . .</div>
+			</div>
+		</div>
+	</div>
+	<script src="../js/common.js"></script>
+	<script>
+		var worker = new Worker('workers.js');
+		worker.postMessage(fibonacci(35+Math.floor(Math.random()*3)));
+		worker.onmessage = function(event) {
+			addMessage(event.data);
+		}
+		worker.onerror = function(event) {
+			addMessage("错误消息:"+event.message+", 文件名:"+event.filename+", 行号:"+event.lineno);
+		}
+	</script>
+</body>
+</html>

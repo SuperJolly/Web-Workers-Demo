@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>使用workers前进行计算</title>
+	<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+	<div class="terminal-0">
+		<div class="tab-panels">
+			<div class="terminal">
+				<button onclick="sayHello()">报告老板</button>
+				<div class="message">计算fibonacci某项值(35-38). . .</div>
+			</div>
+		</div>
+	</div>
+	<script src="../js/common.js"></script>
+	<script>
+		function fibonacci(n) {
+			return n < 2 ? n : arguments.callee(n - 1) + arguments.callee(n - 2);
+		}
+		addMessage(fibonacci(35 + Math.floor(Math.random() * 3)));
+	</script>
+</body>
+</html>
