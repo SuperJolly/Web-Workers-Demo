@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="../css/common.css">
+  <title>测试ArrayBuffer</title>
+</head>
+<body>
+	<div class="terminal-0">
+    <div class="tab-panels">
+      <div class="terminal">
+        <div class="message">将可转让对象所有权转移. . .</div>
+      </div>
+    </div>
+  </div>
+  <script src="../js/common.js"></script>
+  <script>
+    var arrBuf = new ArrayBuffer(1024*1024*32);
+    var worker = new Worker('worker.js');
+    addMessage(arrBuf.byteLength);
+    worker.postMessage(
+      {
+        oData: '开始转让所有权',
+        oBuf: arrBuf
+      },
+      [
+        arrBuf
+      ]);
+    worker.onmessage = function(e) {
+      addMessage('通过查看buffer验证ArrayBuffer是否可用' + e.data.byteLength);
+    }
+  </script>
+</body>
+</html>

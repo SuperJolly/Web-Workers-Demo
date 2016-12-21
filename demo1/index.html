@@ -17,7 +17,7 @@
 	<script src="../js/common.js"></script>
 	<script>
 		var worker = new Worker('workers.js');
-		worker.postMessage(fibonacci(35+Math.floor(Math.random()*3)));
+		worker.postMessage(35+Math.floor(Math.random()*3));
 		worker.onmessage = function(event) {
 			addMessage(event.data);
 		}

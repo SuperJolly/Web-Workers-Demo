@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>使用workers后进行计算</title>
+	<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+	<div class="terminal-0">
+		<div class="tab-panels">
+			<div class="terminal">
+				<button onclick="fiveTasks()">分派五个任务</button>
+				<button onclick="runOne(1)">呼叫任务一</button>
+				<button onclick="runOne(2)">呼叫任务二</button>
+				<button onclick="runOne(3)">呼叫任务三</button>
+				<button onclick="runOne(4)">呼叫任务四</button>
+				<button onclick="runOne(5)">呼叫任务五</button>
+				<div class="message">五个任务异步进行. . .</div>
+			</div>
+		</div>
+	</div>
+	<script src="../js/common.js"></script>
+	<script>
+		function fiveTasks() {
+			var worker1 = new Worker('workers.js');
+			worker1.postMessage({data:30,msg:'任务一'});
+			var worker2 = new Worker('workers.js');
+			worker2.postMessage({data:31,msg:'任务二'});
+			var worker3 = new Worker('workers.js');
+			worker3.postMessage({data:32,msg:'任务三'});
+			var worker4 = new Worker('workers.js');
+			worker4.postMessage({data:33,msg:'任务四'});
+			var worker5 = new Worker('workers.js');
+			worker5.postMessage({data:34,msg:'任务五'});
+		}
+		function runOne(n) {
+			switch(n) {
+				case 1:
+					worker1.postMessage({data:30, msg:'任务一又'}});
+					break;
+				case 2:
+					worker2.postMessage({data:30, msg:'任务二又'}});
+					break;
+				case 3:
+					worker3.postMessage({data:30, msg:'任务三又'}});
+					break;
+				case 4:
+					worker4.postMessage({data:30, msg:'任务四又'}});
+					break;
+				case 5:
+					worker5.postMessage({data:30, msg:'任务五又'}});
+					break;
+				default:
+					break;
+			}
+		}
+		worker1.onmessage =
+		worker2.onmessage =
+		worker3.onmessage =
+		worker4.onmessage = 
+		worker5.onmessage = function(event) {
+			addMessage(event.data);
+		}
+		worker1.onerror = 
+		worker2.onerror =
+		worker3.onerror = 
+		worker4.onerror =
+		worker5.onerror = function(event) {
+			addMessage("错误消息:"+event.message+", 文件名:"+event.filename+", 行号:"+event.lineno);
+		}
+	</script>
+</body>
+</html>
